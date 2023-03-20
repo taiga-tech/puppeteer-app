@@ -24,5 +24,9 @@ export default async function (req, res) {
   const page = await browser.newPage()
   await page.goto('https://github.com/taiga-tech')
 
-  res.send('hello')
+  const html = await page.evaluate(
+    () => document.getElementsByClassName('vcard-names')[0].innerText
+  )
+
+  res.send(html)
 }
